@@ -15,9 +15,14 @@ pub fn fetch_version(pkg_name: &str, version: &str) -> Result<String, Error> {
 
     let mut response = reqwest::get(&url)?;
     if !response.status().is_success() {
-      println!("there was an error fetching {}@{}: {}", pkg_name, version, response.status());
-      println!("fetching {}@latest instead...", pkg_name);
-      return fetch_latest(pkg_name);
+        println!(
+            "there was an error fetching {}@{}: {}",
+            pkg_name,
+            version,
+            response.status()
+        );
+        println!("fetching {}@latest instead...", pkg_name);
+        return fetch_latest(pkg_name);
     }
 
     let mut readme = String::new();
