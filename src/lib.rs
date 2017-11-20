@@ -21,8 +21,6 @@ pub fn fetch_version(pkg_name: &str, version: &str) -> Result<String, Error> {
             version,
             response.status()
         );
-        println!("fetching {}@latest instead...", pkg_name);
-        return fetch_latest(pkg_name);
     }
 
     let mut readme = String::new();
