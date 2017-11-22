@@ -21,6 +21,7 @@ pub fn fetch_version(pkg_name: &str, version: &str) -> Result<String, Error> {
             version,
             response.status()
         );
+        return Err(Error::Response(response));
     }
 
     let mut readme = String::new();
