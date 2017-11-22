@@ -33,21 +33,19 @@ pub fn fetch_latest(pkg_name: &str) -> Result<String, Error> {
     fetch_version(pkg_name, "latest")
 }
 
-fn is_scoped(pkg_name: &str) -> bool {
-    pkg_name.contains('@')
-}
-
 fn build_url(pkg_name: &str, version: &str) -> String {
     dotenv().ok();
     let host = env::var("READ_FILE_HOST").expect("you must provide a READ_FILE_HOST url");
 
-    let first_char = pkg_name.bytes().next().unwrap() as char;
-
     format!(
         "{}/v1/files/file/packages/{}/{}/versions/version/{}/readme.html",
         host,
-        first_char,
+        first_char(pkg_name),
         pkg_name,
         version,
     ).to_string()
+}
+
+fn first_char(pkg_name: &str) -> char {
+    return pkg_name.bytes().next().unwrap() as char;
 }
