@@ -1,7 +1,9 @@
 [package]
-name = "readme-client"
+name = "npm-readme-client"
+description = "interface to npm pkg readmes in rust"
 version = "0.2.0"
 authors = ["Ashley Williams <ashley666ashley@gmail.com>"]
+license = "MIT"
 
 [dependencies]
 dotenv = "0.10.1"
