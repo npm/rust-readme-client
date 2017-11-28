@@ -10,15 +10,15 @@ use dotenv::dotenv;
 
 use error::Error;
 
-pub fn fetch_version(pkg_name: &str, version: &str) -> Result<String, Error> {
-    let url = build_url(pkg_name, version);
+pub fn fetch_version(pkg_name: String, version: String) -> Result<String, Error> {
+    let url = build_url(&pkg_name, &version);
 
     let mut response = reqwest::get(&url)?;
     if !response.status().is_success() {
         println!(
             "there was an error fetching {}@{}: {}",
-            pkg_name,
-            version,
+            &pkg_name,
+            &version,
             response.status()
         );
         return Err(Error::Response(response));
@@ -29,8 +29,8 @@ pub fn fetch_version(pkg_name: &str, version: &str) -> Result<String, Error> {
     Ok(readme)
 }
 
-pub fn fetch_latest(pkg_name: &str) -> Result<String, Error> {
-    fetch_version(pkg_name, "latest")
+pub fn fetch_latest(pkg_name: String) -> Result<String, Error> {
+    fetch_version(pkg_name, String::from("latest"))
 }
 
 fn build_url(pkg_name: &str, version: &str) -> String {
