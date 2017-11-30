@@ -8,7 +8,7 @@ use std::io::Read;
 
 use dotenv::dotenv;
 
-use error::Error;
+pub use error::Error;
 
 pub fn fetch_version(pkg_name: String, version: String) -> Result<String, Error> {
     let url = build_url(&pkg_name, &version);
