@@ -6,7 +6,7 @@ extern crate reqwest;
 #[cfg(test)]
 extern crate mocktopus;
 
-mod error;
+pub mod error;
 
 use std::env;
 use std::io::Read;
