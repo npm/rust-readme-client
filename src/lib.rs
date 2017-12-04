@@ -1,5 +1,10 @@
+#![cfg_attr(test, feature(proc_macro))]
+
 extern crate dotenv;
 extern crate reqwest;
+
+#[cfg(test)]
+extern crate mocktopus;
 
 mod error;
 
@@ -8,8 +13,12 @@ use std::io::Read;
 
 use dotenv::dotenv;
 
+#[cfg(test)]
+use mocktopus::macros::*;
+
 pub use error::Error;
 
+#[cfg_attr(test, mockable)]
 pub fn fetch_version(pkg_name: String, version: String) -> Result<String, Error> {
     let url = build_url(&pkg_name, &version);
 
@@ -29,6 +38,7 @@ pub fn fetch_version(pkg_name: String, version: String) -> Result<String, Error>
     Ok(readme)
 }
 
+#[cfg_attr(test, mockable)]
 pub fn fetch_latest(pkg_name: String) -> Result<String, Error> {
     fetch_version(pkg_name, String::from("latest"))
 }
