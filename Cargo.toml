@@ -9,3 +9,4 @@ license = "MIT"
 [dependencies]
 dotenv = "0.10.1"
 reqwest = "0.8.1"
+mocktopus = "0.1.1"
